@@ -1,7 +1,11 @@
 module.exports = {
     name: 'purge',
+    alis:['delmessage'],
+    cooldown:5,
+    type:'main',
     description: "this is a purge command!",
-    execute(message, args){
+    execute(message, args, Discord){
+        try{
         let arg = message.content.split(" ")
         if(message.member.hasPermission("MANAGE_MESSAGES")) {
         let clear = arg[1];
@@ -18,5 +22,6 @@ module.exports = {
         message.delete({timeout: 10000})
         )}
         else{message.reply("You dont have perms!")}
+    } catch {message.channel.send('Sorry there was an error trying to execute that command')}
     }
 }

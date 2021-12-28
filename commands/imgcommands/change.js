@@ -1,18 +1,14 @@
 module.exports = {
     name: 'change',
+    alis:['changemymind'],
+    cooldown:7,
+    type:'img',
     description: "this is a changemymind async meme command!",
     async execute(message, args, canvacord, Discord){
-        const change = message.content;
-        var parts = change.split(" ");
-        parts.splice(0, 1)
-        var i = 0;
-        var text = "";
-        for (;parts[i];) {
-        text += parts[i] + " ";
-        i++;
-        }
-        let cimg = await canvacord.Canvas.changemymind(text);
+        try {
+        let cimg = await canvacord.Canvas.changemymind(args.join(' '));
         let attachment = new Discord.MessageAttachment(cimg, "changemymindmeme.png");
-        return message.channel.send(attachment);  
+        return message.channel.send(attachment);
+    } catch {message.channel.send('Sorry there was an error trying to execute that command')}
     }
 }

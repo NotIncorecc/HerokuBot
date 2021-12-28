@@ -1,25 +1,22 @@
 module.exports = {
     name: 'ban',
-    description: "this is a ban command!",
-    execute(message, args){
+    alis:['exterminate'],
+    cooldown:5,
+    type:'main',
+    description: "This is a ban command!",
+    execute(message, args, Discord){
+        try{
         if(message.member.hasPermission("BAN_MEMBERS")) {
-            const targ = message.mentions.users.first();
-            const baner = message.author;
-            if (!targ) {message.reply('dude, please mention someone')}
-            else {
-            if (targ.id === "792046280619851786") {message.channel.send("Sorry you can't ban them")}
-            else {
-            if (targ.id === baner.id) {return message.channel.send("you dumb why would you ban youself??")}    
-            if (targ) {const member = message.guild.member(targ);
-            if (member) {
-            member
-            .ban({reason: 'They were bad!',}).then(() => {message.reply("Successfully banned ${user.tag}");}).catch(err => {message.reply("I was unable to ban the member");
-             console.error(err);
-             });
-            } 
-            else {message.reply("That user isn't in this guild!");}
-            }
-            }}
-            }
+        const target = message.mentions.users.first();
+        if (target.id === "792046280619851786") {return message.channel.send("Sorry, my spells don't work on them.")}
+        if(target){
+            const memberTarget = message.guild.members.cache.get(target.id);
+            try {memberTarget.ban();} catch {message.reply('Sorry there was an error banning them');};
+            message.channel.send("User has been banned");
+        }else{
+            message.channel.send(`You coudn't ban that member!`);
+        }
+        } else {message.reply('You don\'t have the permissions');}
+    } catch {message.channel.send('Sorry there was an error trying to execute that command')}
     }
 }

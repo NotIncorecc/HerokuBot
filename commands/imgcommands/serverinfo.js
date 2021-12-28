@@ -1,7 +1,10 @@
 module.exports = {
     name:'serverinfo',
+    alis:['servinf'],
+    cooldown:5,
     description:'server info command',
-    async execute(message, args, Discord) {
+    async execute(message, args, canvacord, Discord) {
+    try{
         let embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(`Info for ${message.guild}`, message.guild.iconURL({ dynamic: true }))
@@ -16,5 +19,6 @@ module.exports = {
         .setFooter(`ID: ${message.guild.id}, Created • ${message.guild.createdAt.toDateString()}`)
 
         message.channel.send(embed)
+    } catch {message.channel.send('Sorry there was an error trying to execute that command')}
     }
 }

@@ -1,7 +1,11 @@
 module.exports = {
     name: 'slap',
+    alis:['sl'],
+    cooldown:5,
+    type:'img',
     description: "this is a slap command!",
     async execute(message, args, canvacord, Discord) {
+      try{
         const victimnam = message.mentions.users.first();
         if (victimnam.username === message.author.username) {message.channel.send('you would you slap yourself bruh, as you wish then')};
         if (!victimnam) {return message.channel.send("mention someone to slap")}
@@ -15,6 +19,7 @@ module.exports = {
           const attachment = new Discord.MessageAttachment(simg, "slap.png");
           return message.channel.send(attachment);
         }
-      } 
+      }
+     } catch {message.channel.send('Sorry there was an error trying to execute that command')}
     }
 }
