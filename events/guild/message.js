@@ -1,4 +1,3 @@
-require('dotenv').config();
 const canvacord = require('canvacord');
 const find_alis = function(palis, dmap) {
     for(var c of dmap) {
@@ -9,7 +8,7 @@ const find_alis = function(palis, dmap) {
 }
 const cooldowns = new Map();
 module.exports = (client ,Discord, message) => {
-    const prefix = process.env.prefix;
+    const prefix = '&';
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
