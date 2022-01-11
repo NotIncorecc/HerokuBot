@@ -12,6 +12,7 @@ module.exports = {
     type:'mus',
     description: 'plays you a song',
     async execute(message, args,Discord, cmd){
+        try{
         //Checking for the voicechannel and permissions (you can add more permissions if you like).
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
@@ -76,6 +77,7 @@ module.exports = {
         }
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'stop') stop_song(message, server_queue);
+    } catch(err){console.log(err); return;};
         }
 }
     
